@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="25dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginBottom="5dp" >
+
+    <TextView
+        android:id="@+id/txtData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="67dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textSize="18dp" 
+        android:paddingTop="5dp"/>
+
+    <ImageView
+        android:id="@+id/imgView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_launcher"
+        android:paddingTop="10dp" />
+
+    <EditText
+        android:id="@+id/searchBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="17dp"
+        android:background="@drawable/edit_text_design"
+        android:ems="10"
+        android:hint="Szukaj"
+        android:visibility="gone"
+        android:paddingBottom="15dp"
+        android:paddingTop="10dp">
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/address"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtData"
+        android:layout_below="@+id/txtData"
+        android:text="TextView" />
+
+</RelativeLayout>

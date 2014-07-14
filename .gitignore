@@ -1,0 +1,10 @@
+#ignorujemy pliki tworzone w czasie kompilacji
+bin/
+gen/
+#pliki skompilowanych klas
+*.class
+#appki
+*.apk
+*.ap_
+#lokalne ustawienia
+local.properieties

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Navi4Uni</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>	
+    <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_building_info">BuildingInfoActivity</string>
+     <string name="zdjecie_budynku">Zdjęcie budynku</string>
+     <string name="favorite_desc">Ikonka ulubionych</string>
+     <string name="marker_okbutton"> OK </string>
+	 <string name="event">Wydarzenie</string>
+	 <string name="location">Budynek-miejsce</string>
+     <string name="description">Opis</string>
+     <string name="allDay">Cały dzień</string>
+     <string name="addEvent">Dodaj wydarzenie</string>
+     <string name="setTime">Ustaw czas</string>
+     <string name="time">Czas</string>
+     <string name="hour">HH</string>
+     <string name="minute">MM</string>
+     <string name="reminder">Przypomnienie</string>
+     <string name="search">Szukaj</string>
+     <string name="filter">Filtruj</string>
+     <string name="favourite">Ulubione</string>
+     <string name="map">Mapa</string>
+     <string name="calendar">Kalendarz</string>
+     <string name="settings">Ustawienia</string>
+     <string name="list">Lista</string>
+     <string name="dailyPlan">Plan dnia</string>
+     
+     <string name="turnOnLocalization">Włacz lokalizacje!</string>
+     <string name="turnOnInternetConnection">Włącz połączenie z internetem!</string>
+     <string name="wrongUrl">bład odnośnika do zasobu internetowego</string>
+     <string name="parserError">Bład parsowania pobranych danych</string>
+
+</resources>
