@@ -28,7 +28,21 @@
      <string name="list">Lista</string>
      <string name="dailyPlan">Plan dnia</string>
      
-     <string name="turnOnLocalization">Włacz lokalizacje!</string>
+     <string name="updateDate">Data aktualizacji</string>
+     <string name="refreshMap">Odśwież mapę</string>
+     <string name="getLastUpdate">Pobierz aktualną wersję</string>
+     <string name="chooseUniversity">Wybierz kampus</string>
+     <string name="getNewObjects">Pobierz nowe obiekty</string>
+     <string name="favouriteList">Lista ulubionych</string>
+     <string name="favouriteListEmpty">Lista ulubionych jest pusta</string>
+     <string name="objectFilter">Filtr obiektów</string>
+     <string name="show">Pokaż</string>
+     <string name="allFieldsEmpty">Wszystkie pola puste</string>
+     <string name="cancel">Anuluj</string>
+     <string name="searchForPlace">Szukaj miejsca..</string>
+     <string name="enterSearchPhrase">Wpisz frazę do wyszukania</string>
+     
+     <string name="turnOnLocalization">Włącz lokalizacje!</string>
      <string name="turnOnInternetConnection">Włącz połączenie z internetem!</string>
      <string name="wrongUrl">bład odnośnika do zasobu internetowego</string>
      <string name="parserError">Bład parsowania pobranych danych</string>

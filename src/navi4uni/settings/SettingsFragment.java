@@ -52,13 +52,13 @@ public class SettingsFragment extends Fragment {
 		
 		String date = MainActivity.context.getSharedPreferences("DATE", Context.MODE_PRIVATE)
 				.getString("currentDate", null);
-		SettingsItems data = new SettingsItems("Data pobrania mapy", date, false);
+		SettingsItems data = new SettingsItems(view.getContext().getString(R.string.updateDate), date, false);
 		settingsList.add(data);
 		
-		SettingsItems refresh = new SettingsItems("Odśwież mapę", "Pobierz aktualną wersję", true);
+		SettingsItems refresh = new SettingsItems(view.getContext().getString(R.string.refreshMap), view.getContext().getString(R.string.getLastUpdate), true);
 		settingsList.add(refresh);
 		
-		SettingsItems maps = new SettingsItems("Wybierz kampus", "Pobierz nowe obiekty", true);
+		SettingsItems maps = new SettingsItems(view.getContext().getString(R.string.chooseUniversity), view.getContext().getString(R.string.getNewObjects), true);
 		settingsList.add(maps);
 		
 	}

@@ -40,9 +40,9 @@ public class SearchDialog {
 	public void showDialog() {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(
-				MainActivity.context).setTitle("Szukaj miejsca..");
+				MainActivity.context).setTitle(MainActivity.context.getString(R.string.searchForPlace));
 
-		builder.setNegativeButton("Anuluj",
+		builder.setNegativeButton(MainActivity.context.getString(R.string.cancel),
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 
@@ -70,7 +70,7 @@ public class SearchDialog {
 					adapter = new SearchAdapter(MainActivity.context);
 					listView.setAdapter(adapter);
 				} else {
-					Toast.makeText(context, "Wpisz frazę do wyszukania",
+					Toast.makeText(context, MainActivity.context.getString(R.string.searchForPlace),
 							Toast.LENGTH_LONG).show();
 				}
 

@@ -54,7 +54,7 @@ public class FilterDialog {
 		}
 		seletedTags = new ArrayList();
 		AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.context);
-		builder.setTitle("Filtr obiektów..");
+		builder.setTitle(MainActivity.context.getString(R.string.objectFilter));
 		builder.setMultiChoiceItems(items, checkedValues,
 				new DialogInterface.OnMultiChoiceClickListener() {
 
@@ -68,7 +68,7 @@ public class FilterDialog {
 						}
 					}
 				})
-				.setPositiveButton("Pokaż",
+				.setPositiveButton(MainActivity.context.getString(R.string.show),
 						new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int id) {
@@ -84,11 +84,11 @@ public class FilterDialog {
 									MapFragment.fillMap(MapFragment.currentMarker);
 
 								}else{
-									Toast.makeText(MainActivity.context, "Wszystkie pola puste", Toast.LENGTH_SHORT).show();
+									Toast.makeText(MainActivity.context, MainActivity.context.getString(R.string.allFieldsEmpty), Toast.LENGTH_SHORT).show();
 								}
 							}
 						})
-				.setNegativeButton("Anuluj",
+				.setNegativeButton(MainActivity.context.getString(R.string.cancel),
 						new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int id) {
