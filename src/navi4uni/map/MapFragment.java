@@ -517,7 +517,7 @@ public class MapFragment extends Fragment implements LocationListener {
         while (itr.hasNext()) {
                 NaviMarker a = itr.next();
                 if(phrase != null){
-	                if (a.searchPhrase(phrase)) {
+	                if (a.searchPhraseIgnoringCase(phrase)) {
 	                        temp.add(a);
 	                }
                 }
@@ -536,7 +536,7 @@ public class MapFragment extends Fragment implements LocationListener {
         while (itr.hasNext()) {
                 NaviMarker a = itr.next();
                 if(phrase != null){
-	                if (a.searchPhrase(phrase)) {
+	                if (a.searchPhraseIgnoringCase(phrase)) {
 	                        temp.add(a.getName());
 	                }
                 }

@@ -240,6 +240,39 @@ public class NaviMarker implements Serializable {
 		return false;
 	}
 	
+	public boolean searchPhraseIgnoringCase(String _phrase){
+		_phrase = _phrase.toLowerCase();
+		
+		if(this.getAddress().toLowerCase().contains(_phrase)){
+			return true;
+		}
+		if(this.getDescription().toLowerCase().contains(_phrase)){
+			return true;
+		}
+		if(this.getMail().toLowerCase().contains(_phrase)){
+			return true;
+		}
+		if(this.getName().toLowerCase().contains(_phrase)){
+			return true;
+		}
+		if(this.getOpenHours().toLowerCase().contains(_phrase)){
+			return true;
+		}
+		if(this.getPhone().toLowerCase().contains(_phrase)){
+			return true;
+		}
+		if(this.getSnippet().toLowerCase().contains(_phrase)){
+			return true;
+		}
+		if(this.getTag().toLowerCase().contains(_phrase)){
+			return true;
+		}
+		if(this.getWww().toLowerCase().contains(_phrase)){
+			return true;
+		}
+		return false;
+	}
+	
     private void writeObject(java.io.ObjectOutputStream stream)
             throws IOException {
         stream.writeObject(this.tag);
