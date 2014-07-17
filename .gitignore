@@ -8,3 +8,5 @@ gen/
 *.ap_
 #lokalne ustawienia
 local.properieties
+project.properties
+.classpath
