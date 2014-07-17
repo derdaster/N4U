@@ -9,7 +9,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="#1281A9"
+        android:background="#00a2c8"
         android:orientation="vertical"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:scrollbars="vertical"
@@ -61,7 +61,8 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:autoLink="phone"
-            android:textColor="#FFF" />
+            android:textColor="#FFF"
+            android:textColorLink="#0048ff" />
 
         <TextView
             android:id="@+id/building_www"
@@ -70,7 +71,8 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:autoLink="web"
-            android:textColor="#FFF" />
+            android:textColor="#FFF"
+            android:textColorLink="#0048ff" />
 
         <TextView
             android:id="@+id/building_mail"
@@ -79,7 +81,8 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:autoLink="email"
-            android:textColor="#FFF" />
+            android:textColor="#FFF"
+            android:textColorLink="#0048ff" />
 
         <TextView
             android:id="@+id/building_department"
@@ -101,7 +104,7 @@
 
         <ImageView
             android:id="@+id/building_photo"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="5dp"
@@ -112,16 +115,47 @@
             android:id="@+id/favorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:layout_gravity="center_horizontal"
             android:contentDescription="@string/favorite_desc" />
 
+        <LinearLayout
+		    android:id="@+id/linearLayout2"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"		 
+            android:background="#d9d9d9"
+		    android:orientation="horizontal" >
+			<Button
+	            android:id="@+id/dialogShowEventsButton"
+	            android:textSize="14sp"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:layout_marginTop="1dp"
+            	android:layout_marginBottom="1dp"
+	            android:layout_marginRight="1dp"
+	            android:background="#FFF"
+	            android:text="@string/marker_showevent_button" />
+			
+			<Button
+	            android:id="@+id/addEventButton"
+	            android:textSize="14sp"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:layout_marginTop="1dp"
+            	android:layout_marginBottom="1dp"
+	            android:background="#FFF"
+	            android:text="@string/marker_addevent_button" />
+		</LinearLayout>
+		
         <Button
-            android:id="@+id/dialogButtonOK"
-            android:layout_width="100dp"
+            android:id="@+id/dialogBuildingButtonOK"
+            android:textSize="14sp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp"
+            android:background="#FFF"
             android:text="@string/marker_okbutton" />
     </LinearLayout>
 

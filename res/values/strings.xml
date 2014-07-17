@@ -8,7 +8,7 @@
     <string name="title_activity_building_info">BuildingInfoActivity</string>
      <string name="zdjecie_budynku">Building photo</string>
      <string name="favorite_desc">Favourites</string>
-     <string name="marker_okbutton"> OK </string>
+     <string name="marker_okbutton">Anuluj</string>
 	 <string name="event">Event</string>
 	 <string name="location">Building</string>
      <string name="description">Description</string>
@@ -27,7 +27,9 @@
      <string name="settings">Settings</string>
      <string name="list">List</string>
      <string name="dailyPlan">Daily plan</string>
-     
+     <string name="marker_addevent_button">Dodaj wydarzenie</string>
+     <string name="marker_showevent_button">Pokaż wydarzenia</string>
+          
      <string name="turnOnLocalization">Turn on GPS!</string>
      <string name="turnOnInternetConnection">Turn on internet connection!</string>
      <string name="wrongUrl">Error related with a link to an internet resource</string>

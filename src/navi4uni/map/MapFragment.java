@@ -271,7 +271,7 @@ public class MapFragment extends Fragment implements LocationListener {
                             		
                             favIcon.setOnClickListener(new FavoriteListener(temp));
                             
-                            Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+                            Button dialogButton = (Button) dialog.findViewById(R.id.dialogBuildingButtonOK);
                             dialogButton.setOnClickListener(new OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
