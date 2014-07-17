@@ -524,7 +524,25 @@ public class MapFragment extends Fragment implements LocationListener {
         }
         return temp;
 }
-
+	public static ArrayList<String> searchNamesByParameter(String phrase, ArrayList<NaviMarker> markers) {
+        ArrayList<String> temp = new ArrayList<String>();
+        Iterator<NaviMarker> itr;
+        try{
+                itr = markers.iterator();
+        }catch(Exception e){
+                markers = NaviMarker.markerList;
+                itr = markers.iterator();
+        }
+        while (itr.hasNext()) {
+                NaviMarker a = itr.next();
+                if(phrase != null){
+	                if (a.searchPhrase(phrase)) {
+	                        temp.add(a.getName());
+	                }
+                }
+        }
+        return temp;
+}
 	// INTERFACE LocationListener
 	@Override
 	public void onLocationChanged(Location location) {

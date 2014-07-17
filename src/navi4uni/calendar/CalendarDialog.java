@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -34,6 +35,7 @@ import android.support.v4.app.Fragment;
 
 public class CalendarDialog {
 	private EventListAdapter adapter;
+	private BuildingAutoAdapter adapter2;
 	private ListView list;
 	private static View view;
 	private static View dialogLayout;
@@ -93,9 +95,9 @@ public class CalendarDialog {
 			secDay = d;
 		}
 	}
-	
-	public void setFromDrawerRight(boolean setter){
-		this.fromDrawerRight=setter;
+
+	public void setFromDrawerRight(boolean setter) {
+		this.fromDrawerRight = setter;
 	}
 
 	public static FragmentManager getManager() {
@@ -105,28 +107,20 @@ public class CalendarDialog {
 	public void showEventListDialog() {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(
-				MainActivity.context).setTitle("Lista wydarzeń");
-		builder.setPositiveButton("Dodaj",
+				MainActivity.context).setTitle(MainActivity.context
+				.getString(R.string.eventList));
+		builder.setPositiveButton(MainActivity.context.getString(R.string.add),
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
-
-						/*
-						 * Tutaj masz obsługę jak nacisniesz przycisk dodaj w
-						 * oknie dialogu.
-						 */
 
 						showCalendarDialog();
-
 					}
 				});
-		builder.setNegativeButton("Anuluj",
+		builder.setNegativeButton(
+				MainActivity.context.getString(R.string.cancel),
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
-						/*
-						 * Tu masz miejsce co się stanie jak nacisniesz anuluj
-						 */
 
-						// getEvents(view);
 						dialog.cancel();
 					}
 				});
@@ -139,9 +133,7 @@ public class CalendarDialog {
 		View dialoglayout = inflater.inflate(R.layout.calendar_events_list,
 				frameView);
 
-		list = (ListView) dialoglayout.findViewById(R.id.list); // List defined
-																// in XML ( See
-																// Below )
+		list = (ListView) dialoglayout.findViewById(R.id.list);
 
 		adapter = new EventListAdapter(MainActivity.context,
 				CustomListViewValuesArr);
@@ -153,21 +145,15 @@ public class CalendarDialog {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view2,
 					int position, long id) {
-				/*String temp=((TextView) view.findViewById(R.id.event_building)).getText().toString();
-				Toast.makeText(view.getContext(),
-						"Click ListItem Number " + temp, Toast.LENGTH_LONG)
-						.show();
-				ArrayList<NaviMarker> list = (ArrayList<NaviMarker>) NaviMarker.getMarkerList();
-				for(NaviMarker m : list) {
-					//if(m.getName().equals(items[which])) 
-					{	//szuamy w liscie markera o tej nazwie
-						//MapFragment.setFocusOnLatLng(m.getLatLng(), MapFragment.mMap );
-						Log.i("ULUBIONE", "Click on: " + m.getName());
-						
-					}
-				}*/
 
+				// MapFragment.setFocusOnLatLng(searchList.get(position)
+				// .getLatLng(), MapFragment.mMap);
+				Toast toast = Toast.makeText(MainActivity.context,
+						"Kliknąłeś wydarzenie",
+						Toast.LENGTH_LONG);
+				toast.show();
 				
+
 			}
 		});
 		alertDialog.show();
@@ -176,36 +162,24 @@ public class CalendarDialog {
 
 	public void showCalendarDialog() {
 
-		/*
-		 * Zrezygnowałem z przeskakiwania do innego fragmentu bo wydaje mi się
-		 * że tak jest jakoś przyjemniej jak co to poprostu wywołaj twoja
-		 * metodę z fragmentem. Nic ci nie kasowałem także możesz wrócić.
-		 */
 		AlertDialog.Builder builder = new AlertDialog.Builder(
-				MainActivity.context).setTitle("Dodaj wydarzenie..");
+				MainActivity.context).setTitle(MainActivity.context
+				.getString(R.string.addEvent));
 
-		builder.setPositiveButton("Dodaj",
+		builder.setPositiveButton(MainActivity.context.getString(R.string.add),
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
-
-						/*
-						 * Tutaj masz obsługę jak nacisniesz przycisk dodaj w
-						 * oknie dialogu.
-						 */
 
 						addEvent(view);
 
 					}
 				});
 
-		builder.setNegativeButton("Anuluj",
+		builder.setNegativeButton(
+				MainActivity.context.getString(R.string.cancel),
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
-						/*
-						 * Tu masz miejsce co się stanie jak nacisniesz anuluj
-						 */
 
-						// getEvents(view);
 						if (!fromDrawerRight)
 							showEventListDialog();
 					}
@@ -217,8 +191,6 @@ public class CalendarDialog {
 		final AlertDialog alertDialog = builder.create();
 		LayoutInflater inflater = alertDialog.getLayoutInflater();
 		View dialoglayout = inflater.inflate(R.layout.calendar, frameView);
-
-		// setDialogListeners(dialoglayout);
 
 		EditText mEditInit = (EditText) dialoglayout
 				.findViewById(R.id.editText4);
@@ -292,6 +264,12 @@ public class CalendarDialog {
 		c.add(Calendar.HOUR_OF_DAY, 1);
 		e = (EditText) dialogLayout.findViewById(R.id.editText6);
 		e.setText(DateFormat.format("k:mm", c));
+
+		AutoCompleteTextView style = (AutoCompleteTextView) dialogLayout
+				.findViewById(R.id.editText2);
+		adapter2 = new BuildingAutoAdapter(dialogLayout.getContext(),
+				android.R.layout.simple_dropdown_item_1line);
+		style.setAdapter(adapter2);
 	}
 
 	public void addEvent(View v) {
@@ -326,35 +304,33 @@ public class CalendarDialog {
 
 	public void showSearchDialog() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(
-				MainActivity.context).setTitle("Szukaj");
+				MainActivity.context).setTitle(MainActivity.context
+				.getString(R.string.search));
 
-		builder.setPositiveButton("Szukaj",
+		builder.setPositiveButton(
+				MainActivity.context.getString(R.string.search),
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 
-						/*
-						 * Tutaj masz obsługę jak nacisniesz przycisk dodaj w
-						 * oknie dialogu.
-						 */
 						EditText e = (EditText) dialogLayout
 								.findViewById(R.id.searchText);
 						search = e.getText().toString();
-						
-						Toast toast = Toast.makeText(MainActivity.context, "Wyszukuje wszystie wydarzenia, brak kryterium" , Toast.LENGTH_LONG);
+
+						Toast toast = Toast
+								.makeText(
+										MainActivity.context,
+										"Wyszukuje wszystie wydarzenia, brak kryterium",
+										Toast.LENGTH_LONG);
 						toast.show();
 						showEventListDialog();
 
 					}
 				});
 
-		builder.setNegativeButton("Anuluj",
+		builder.setNegativeButton(
+				MainActivity.context.getString(R.string.cancel),
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
-						/*
-						 * Tu masz miejsce co się stanie jak nacisniesz anuluj
-						 */
-
-						// getEvents(view);
 
 						dialog.cancel();
 					}
@@ -366,8 +342,6 @@ public class CalendarDialog {
 		final AlertDialog alertDialog = builder.create();
 		LayoutInflater inflater = alertDialog.getLayoutInflater();
 		View dialoglayout = inflater.inflate(R.layout.search_events, frameView);
-
-		// setDialogListeners(dialoglayout);
 
 		EditText mEditInit = (EditText) dialoglayout
 				.findViewById(R.id.editText4);

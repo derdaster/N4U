@@ -41,6 +41,8 @@
      <string name="cancel">Anuluj</string>
      <string name="searchForPlace">Szukaj miejsca..</string>
      <string name="enterSearchPhrase">Wpisz frazę do wyszukania</string>
+     <string name="add">Dodaj</string>
+     <string name="eventList">Lista wydarzeń</string>
      
      <string name="turnOnLocalization">Włącz lokalizacje!</string>
      <string name="turnOnInternetConnection">Włącz połączenie z internetem!</string>

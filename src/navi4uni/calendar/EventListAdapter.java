@@ -103,7 +103,7 @@ public class EventListAdapter extends BaseAdapter {
 				Instances.DESCRIPTION // 5
 		};
 
-		// The indices for the projection array above.
+		
 		final int PROJECTION_ID_INDEX = 0;
 		final int PROJECTION_BEGIN_INDEX = 1;
 		final int PROJECTION_END_INDEX = 2;
@@ -111,8 +111,7 @@ public class EventListAdapter extends BaseAdapter {
 		final int PROJECTION_LOCATION_INDEX = 4;
 		final int PROJECTION_DESCRIPTION_INDEX = 5;
 
-		// Specify the date range you want to search for recurring
-		// event instances
+		
 		Calendar beginTime = Calendar.getInstance();
 		if (mainYear != 0){
 			beginTime.set(mainYear, mainMonth, mainDay, 0, 0);
@@ -134,17 +133,16 @@ public class EventListAdapter extends BaseAdapter {
 		Cursor cur = null;
 		ContentResolver cr = view.getContext().getContentResolver();
 
-		// The ID of the recurring event whose instances you are searching
-		// for in the Instances table
+		
 		String selection = Instances.CALENDAR_ID + " = ? AND ( "
 				+ Instances.TITLE + " like ? OR " + Instances.EVENT_LOCATION
 				+ " like ? OR " + Instances.DESCRIPTION + " like ? )";
 		String[] selectionArgs = new String[] { "1", "%" + search + "%",
 				"%" + search + "%", "%" + search + "%"};
 
-		// Construct the query with the desired date range.
+		
 		Uri.Builder builder = Instances.CONTENT_URI.buildUpon();
-		//Uri.Builder builder = Uri.parse("content://com.android.calendar/instances/when").buildUpon();
+		
 		
 		ContentUris.appendId(builder, startMillis);
 		ContentUris.appendId(builder, endMillis);
@@ -200,7 +198,7 @@ public class EventListAdapter extends BaseAdapter {
 
 			Log.e(DEBUG_TAG, "End date: " + eTime);
 			String dateString = bDate + " " + bTime + "-" + eTime;
-			// if (title.contains("do"))
+			
 			setListData(title, location, description, dateString,
 					CustomListViewValuesArr);
 		}
