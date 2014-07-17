@@ -271,6 +271,24 @@ public class MapFragment extends Fragment implements LocationListener {
                             		
                             favIcon.setOnClickListener(new FavoriteListener(temp));
                             
+                            Button showEventsButton = (Button) dialog.findViewById(R.id.dialogShowEventsButton);
+                            showEventsButton.setOnClickListener(new OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                    	Toast.makeText(getActivity().getApplicationContext(), "Wydarzenia w tym budynku",
+                                    			   Toast.LENGTH_SHORT).show();
+                                    }
+                            });
+                            
+                            Button addEventButton = (Button) dialog.findViewById(R.id.addEventButton);
+                            addEventButton.setOnClickListener(new OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                    	Toast.makeText(getActivity().getApplicationContext(), "Dodanie nowego wydarzenie do budynku",
+                                    			   Toast.LENGTH_SHORT).show();
+                                    }
+                            });
+                            
                             Button dialogButton = (Button) dialog.findViewById(R.id.dialogBuildingButtonOK);
                             dialogButton.setOnClickListener(new OnClickListener() {
                                     @Override
@@ -376,6 +394,24 @@ public class MapFragment extends Fragment implements LocationListener {
                             	favIcon.setImageResource(R.drawable.ulubione);
                             }
                             favIcon.setOnClickListener(new FavoriteListener(temp));
+                            
+                            Button showEventsButton = (Button) dialog.findViewById(R.id.dialogShowEventsButton);
+                            showEventsButton.setOnClickListener(new OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                    	Toast.makeText(getActivity().getApplicationContext(), "Wydarzenia w tym miejscu",
+                                    			   Toast.LENGTH_SHORT).show();
+                                    }
+                            });
+                            
+                            Button addEventButton = (Button) dialog.findViewById(R.id.addEventButton);
+                            addEventButton.setOnClickListener(new OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                    	Toast.makeText(getActivity().getApplicationContext(), "Dodanie nowego wydarzenie do miejsca",
+                                    			   Toast.LENGTH_SHORT).show();
+                                    }
+                            });
                             
                             Button dialogButton = (Button) dialog.findViewById(R.id.dialogPlaceButtonOK);
                             dialogButton.setOnClickListener(new OnClickListener() {
