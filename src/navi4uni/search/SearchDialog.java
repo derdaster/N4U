@@ -85,7 +85,7 @@ public class SearchDialog {
 					long arg3) {
 				
 				MapFragment.setFocusOnLatLng(searchList.get(position)
-						.getLatLng(), MapFragment.mMap);
+						.getLatLng(), MapFragment.mMap, true);
 				alertDialog.cancel();
 			}
 		});

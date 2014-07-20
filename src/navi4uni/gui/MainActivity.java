@@ -7,6 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.concurrent.ExecutionException;
+
+import com.google.android.gms.maps.model.LatLng;
+
 import navi4uni.calendar.CalendarDialog;
 import navi4uni.calendar.CalendarFragment;
 import navi4uni.calendar.NavigationDrawerRightForCalendar;
@@ -26,6 +29,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.provider.Telephony.Mms;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -69,7 +73,6 @@ public class MainActivity extends ActionBarActivity {
 	public static CampusXmlInterpteter campus;
 	public static SaveData storage = new SaveData();
 	public static int currentPosition = 0;
-
 	public static XMLFileDownloader xmlDownloader = new XMLFileDownloader(
 			MainActivity.context);;
 
@@ -232,7 +235,18 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	private void changeFragmentLeft(int position) {
-
+		
+		
+		//zapis aktualnego polozenia mapy - NIE DZIALA !!!
+		if(MapFragment.mMap != null){
+			if(MapFragment.mMap.getCameraPosition() != null){
+				Log.i("Map object", MapFragment.mMap.getCameraPosition().toString());
+				MapFragment.currentCameraPosition = new LatLng(MapFragment.mMap.getCameraPosition().target.latitude,
+						MapFragment.mMap.getCameraPosition().target.longitude);
+			}
+			else { Log.i("+!!!!!!!!!", "znowu nie dziala");}
+		}
+		
 		fragmentManager = getSupportFragmentManager();
 		FragmentTransaction transaction = fragmentManager.beginTransaction();
 
@@ -262,7 +276,7 @@ public class MainActivity extends ActionBarActivity {
 			transaction.replace(R.id.Frame_Layout, new SettingsFragment());
 			break;
 		}
-
+		
 		}
 		transaction.commit();
 		mDrawerlayout.closeDrawer(mDrawerListLeft);
@@ -364,7 +378,6 @@ public class MainActivity extends ActionBarActivity {
 					.beginTransaction()
 					.remove(MainActivity.fragmentManager
 							.findFragmentById(R.id.location_map)).commit();
-
 			MapFragment.mMap = null;
 		}
 	}
@@ -394,7 +407,7 @@ public class MainActivity extends ActionBarActivity {
 		}
 	}
 
-	public static void refreshMap(boolean links) {
+	public static void refreshMap(boolean links) { 
 
 		try {
 			if (links == true) {

@@ -49,6 +49,7 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
+import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
@@ -56,14 +57,16 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
 
-public class MapFragment extends Fragment implements LocationListener {
+public class MapFragment extends Fragment implements LocationListener, LocationSource {
 
 	private static View view;
-	public static GoogleMap mMap;
-	// private static Double latitude, longitude;
+	public static GoogleMap mMap = null;
+	public static LatLng currentCameraPosition = null;
 	// atrybuty dla kodu okreslajacego aktualna pozycje
-	private LocationManager locationManager;
-	private boolean locationManagerIsEnabled = false;
+	private static LocationManager locationManager;
+	private static boolean locationManagerIsEnabled = false;
+	private static boolean GPSManagerIsEnabled = false;
+	private static OnLocationChangedListener locationChangedListener;
 
 	private static final long MIN_TIME = 400;
 	private static final float MIN_DISTANCE = 1000;
@@ -93,11 +96,19 @@ public class MapFragment extends Fragment implements LocationListener {
 		}
 		
 		setUpMapIfNeeded();
-		mMap.setMyLocationEnabled(true);
+		
 		locationManager = (LocationManager) getActivity().getSystemService(
 				Context.LOCATION_SERVICE);
-		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-				MIN_TIME, MIN_DISTANCE, this);
+		if(locationManager != null){
+			GPSManagerIsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            locationManagerIsEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+			if(GPSManagerIsEnabled)
+				locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+						MIN_TIME, MIN_DISTANCE, this);
+			else if(locationManagerIsEnabled)
+				locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000L, 10F, this);
+		}
+			
 		try{
 			if(!currentMarker.isEmpty()){
 				fillMap(currentMarker);
@@ -106,42 +117,51 @@ public class MapFragment extends Fragment implements LocationListener {
 			fillMap(NaviMarker.markerList);
 		}
 		
-		locationManagerIsEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 		//Default position form XML
-		if(NaviMarker.defaultPosition != null){
-			MapFragment.setFocusOnLatLng(NaviMarker.defaultPosition, MapFragment.mMap);
+		if(NaviMarker.defaultPosition != null && MapFragment.currentCameraPosition == null){
+			MapFragment.setFocusOnLatLng(NaviMarker.defaultPosition, MapFragment.mMap, true);
+		}
+		else if (currentCameraPosition != null){
+			MapFragment.setFocusOnLatLng(MapFragment.currentCameraPosition, MapFragment.mMap, false);
 		}
 		
-		else{
-			if(locationManagerIsEnabled){
-				CameraUpdate cameraUpdate;
-				String locationProvider = LocationManager.NETWORK_PROVIDER;
-				Location lastKnownLocation = locationManager
-						.getLastKnownLocation(locationProvider);
-				LatLng last = new LatLng(lastKnownLocation.getLatitude(),
-						lastKnownLocation.getLongitude());
-				cameraUpdate = CameraUpdateFactory.newCameraPosition(new CameraPosition(last, 16, 60, 0)); 
-				mMap.animateCamera(cameraUpdate); 
-			}
-			else{
-				Toast.makeText(this.getActivity().getApplicationContext(),R.string.turnOnLocalization, Toast.LENGTH_LONG).show();
-			}
-		}
-
 		addMarkerDialogListener();		
 		
 		return view;
 	}
+	
 
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		setUpMapIfNeeded();
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		if (mMap != null) {
+			try {
+				MainActivity.fragmentManager
+						.beginTransaction()
+						.remove(MainActivity.fragmentManager
+								.findFragmentById(R.id.location_map)).commit();
+			} catch (Exception e) {
+				Log.e("", "", e);
+			}
+			mMap = null;
+		}
+	}
 	
 	/** Method assignes map from resources if current mMap reference is empty.
 	 * 
 	 *  Quality : q1 (verified code by other developer)
 	 */
-	public static void setUpMapIfNeeded() {
+	public void setUpMapIfNeeded() {
 		if (mMap == null) {
 			mMap = ((SupportMapFragment) MainActivity.fragmentManager
 					.findFragmentById(R.id.location_map)).getMap();
+			mMap.setMyLocationEnabled(true);
+			mMap.setLocationSource(this);
 		}
 	}
 
@@ -151,13 +171,16 @@ public class MapFragment extends Fragment implements LocationListener {
 	 * 
 	 * Quality: q2 (fixed code accordingly to the developer remarks). 
 	 */
-	public static void setFocusOnLatLng(LatLng position, GoogleMap map ){
+	public static void setFocusOnLatLng(LatLng position, GoogleMap map, boolean animate ){
 		CameraUpdate cameraUpdate;
 		cameraUpdate = CameraUpdateFactory.newCameraPosition
-				(new CameraPosition(position, 18, 0, 0)); 
-		map.animateCamera(cameraUpdate); 
+				(new CameraPosition(position, 17, 0, 0)); 
+		if(animate)
+			map.animateCamera(cameraUpdate);
+		else
+			map.moveCamera(cameraUpdate);
 	}
-
+	
 	/* Method generate window of dialog with data of markers. It add Listerner to MarkerInfoWindow.
 	 * If user choose marker on map, application will show information window contains filds from Marker class. 
 	 * 
@@ -438,32 +461,6 @@ public class MapFragment extends Fragment implements LocationListener {
         );
     }
 	
-	
-	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-
-		if (mMap == null) {
-			mMap = ((SupportMapFragment) MainActivity.fragmentManager
-					.findFragmentById(R.id.location_map)).getMap();
-		}
-	}
-
-	@Override
-	public void onDestroyView() {
-		super.onDestroyView();
-		if (mMap != null) {
-			try {
-				MainActivity.fragmentManager
-						.beginTransaction()
-						.remove(MainActivity.fragmentManager
-								.findFragmentById(R.id.location_map)).commit();
-			} catch (Exception e) {
-				Log.e("", "", e);
-			}
-			mMap = null;
-
-		}
-	}
 
 	/* fillMap operation puts markers on map in mMap reference. 
 	 * After action user can see definied markers on Map with predefinied icons.
@@ -481,6 +478,8 @@ public class MapFragment extends Fragment implements LocationListener {
 			mMap.addMarker(a.getMarker());
 		}
 	}
+	
+	
 
 	
 	 /* Set the right icon from the resources on the given marker.
@@ -604,6 +603,20 @@ public class MapFragment extends Fragment implements LocationListener {
 	
 	public static void clearAllMarkers(){
 		mMap.clear();
+	}
+
+
+
+	@Override
+	public void activate(OnLocationChangedListener listener) {
+		locationChangedListener = listener;
+	}
+
+
+
+	@Override
+	public void deactivate() {
+		locationChangedListener = null;
 	}
 
 }

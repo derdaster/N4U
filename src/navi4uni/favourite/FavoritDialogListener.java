@@ -20,7 +20,7 @@ public class FavoritDialogListener implements android.content.DialogInterface.On
 		ArrayList<NaviMarker> list = (ArrayList<NaviMarker>) NaviMarker.getMarkerList();
 		for(NaviMarker m : list) {
 			if(m.getName().equals(items[which])) {	//szuamy w liscie markera o tej nazwie
-				MapFragment.setFocusOnLatLng(m.getLatLng(), MapFragment.mMap );
+				MapFragment.setFocusOnLatLng(m.getLatLng(), MapFragment.mMap, true );
 			}
 		}
 	}

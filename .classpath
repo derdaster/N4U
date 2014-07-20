@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="lib" path="C:/Users/admin/Documents/android sdk/adt-bundle-windows-x86-20131030/adt-bundle-windows-x86-20131030/sdk/extras/google/google_play_services/libproject/google-play-services_lib/libs/google-play-services.jar"/>
-	<classpathentry kind="lib" path="C:/Users/admin/Documents/android sdk/adt-bundle-windows-x86-20131030/adt-bundle-windows-x86-20131030/sdk/extras/android/support/v7/appcompat/libs/android-support-v7-appcompat.jar"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/android-support-v7-appcompat"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/google-play-services_lib"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
