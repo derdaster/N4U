@@ -178,15 +178,13 @@ public class MapFragment extends Fragment implements LocationListener {
            
             if (temp instanceof BuildingMarker) {
                     Log.i("logi", "TYP: BUILDINGMARKER");                  
-                    //temp = (BuildingMarker)temp;
                             final Dialog dialog = new Dialog(getActivity());
                             dialog.setContentView(R.layout.buildingmarker_dialog);
-                            dialog.setTitle("Informacje o budynku");                       
+                            dialog.setTitle(temp.getName());
+                            
                             // Ustawianie danych
-                            TextView buildingName = (TextView) dialog.findViewById(R.id.building_name);
-                            buildingName.setText("Budynek: " + temp.getName());
                             TextView buildingDescription = (TextView) dialog.findViewById(R.id.building_description);
-                            buildingDescription.setText("Opis: " + temp.getDescription()); 
+                            buildingDescription.setText(temp.getDescription()); 
                             TextView buildingOpenHours = (TextView) dialog.findViewById(R.id.building_openhours);
                             if(temp.getOpenHours().equals(" "))
                             {
@@ -194,7 +192,7 @@ public class MapFragment extends Fragment implements LocationListener {
                                     buildingOpenHours.setWillNotDraw(true);
                             }
                             else {
-                                    buildingOpenHours.setText("Godziny Otwarcia: " + temp.getOpenHours());                                                 
+                                    buildingOpenHours.setText("Godziny otwarcia: " + temp.getOpenHours());                                                 
                             }
                             TextView buildingAddress = (TextView) dialog.findViewById(R.id.building_address);
                             if(temp.getAddress().equals(" "))
@@ -203,7 +201,7 @@ public class MapFragment extends Fragment implements LocationListener {
                                     buildingAddress.setWillNotDraw(true);
                             }
                             else {
-                                    buildingAddress.setText("Adress budynku: " + temp.getAddress());                               
+                                    buildingAddress.setText("Adress: " + temp.getAddress());                               
                             }
                             TextView buildingPhone = (TextView) dialog.findViewById(R.id.building_phone);
                             if(temp.getPhone().equals(" "))
@@ -312,12 +310,12 @@ public class MapFragment extends Fragment implements LocationListener {
                     Log.i("logi", "TYP: PLACESMARKER");                    
                             final Dialog dialog = new Dialog(getActivity());
                             dialog.setContentView(R.layout.placemarker_dialog);
-                            dialog.setTitle("Informacje o miejscu");                       
+                            dialog.setTitle(temp.getName());                       
                             // Ustawianie danych
-                            TextView placeName = (TextView) dialog.findViewById(R.id.place_name);
-                            placeName.setText("Miejsce: " + temp.getName());
+
                             TextView placeDescription = (TextView) dialog.findViewById(R.id.place_description);
-                            placeDescription.setText("Opis: " + temp.getDescription());    
+                            placeDescription.setText(temp.getDescription());   
+                            
                             TextView placeOpenHours = (TextView) dialog.findViewById(R.id.place_openhours);
                             if(temp.getOpenHours().equals(" ")){
                                     placeOpenHours.setHeight(0);
