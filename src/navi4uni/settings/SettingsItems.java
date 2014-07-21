@@ -106,6 +106,7 @@ public class SettingsItems {
 								MainActivity.imgRightMenu.setVisibility(View.VISIBLE);
 								MainActivity.mDrawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, MainActivity.mDrawerListRight);
 								FragmentTransaction transaction = MainActivity.fragmentManager.beginTransaction(); 
+								MapFragment.currentCameraPosition = null;
 								transaction.replace(R.id.Frame_Layout, new MapFragment());
 								SettingsItems.dialog.dismiss();
 								transaction.commit();
