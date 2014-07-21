@@ -97,7 +97,7 @@ public class SettingsItems {
 				if (uni != null) {
 
 					SettingsItems.dialog = ProgressDialog.show(
-							MainActivity.context, null, "ProszÄ™ czekaÄ‡..");
+							MainActivity.context, null, "Proszê czekaæ..");
 
 					handler = new Handler() {
 						public void handleMessage(Message msg) {

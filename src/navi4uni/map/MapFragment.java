@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import navi4uni.calendar.CalendarDialog;
+import navi4uni.calendar.CalendarFragment;
 import navi4uni.gui.MainActivity;
 import navi4uni.gui.R;
 import navi4uni.places.BuildingMarker;
@@ -33,6 +35,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,6 +43,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -203,7 +207,12 @@ public class MapFragment extends Fragment implements LocationListener, LocationS
                     Log.i("logi", "TYP: BUILDINGMARKER");                  
                             final Dialog dialog = new Dialog(getActivity());
                             dialog.setContentView(R.layout.buildingmarker_dialog);
+                            
                             dialog.setTitle(temp.getName());
+                            TextView buildingName = (TextView) dialog.findViewById(R.id.building_name);
+                            buildingName.setText(temp.getName());
+                            buildingName.setHeight(0);
+                            buildingName.setWillNotDraw(true);
                             
                             // Ustawianie danych
                             TextView buildingDescription = (TextView) dialog.findViewById(R.id.building_description);
@@ -305,8 +314,24 @@ public class MapFragment extends Fragment implements LocationListener, LocationS
                             addEventButton.setOnClickListener(new OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
+                                    	//przed zamknieciem zapisujemy wartosc nazwy budynku                                   	
+                                    	TextView nameField = (TextView) dialog.findViewById(R.id.building_name);
+                                    	CharSequence name = nameField.getText();
+                                    	
+                                    	dialog.dismiss();
+                                    	
+                                    	FragmentTransaction transaction = MainActivity.fragmentManager.beginTransaction(); 
+                                    	transaction.replace(R.id.Frame_Layout, new CalendarFragment());
                                     	Toast.makeText(getActivity().getApplicationContext(), "Dodanie nowego wydarzenie do budynku",
                                     			   Toast.LENGTH_SHORT).show();
+                                    	
+                                    	transaction.commit();
+                                    	
+                                    	CalendarDialog dialog = new CalendarDialog();
+                        				dialog.setFromDrawerRight(true);
+                        				dialog.showCalendarDialog();
+                        				EditText e =(EditText)dialog.getView().findViewById(R.id.editText2);
+                        				e.setText(name);
                                     }
                             });
                             
@@ -331,7 +356,13 @@ public class MapFragment extends Fragment implements LocationListener, LocationS
                     Log.i("logi", "TYP: PLACESMARKER");                    
                             final Dialog dialog = new Dialog(getActivity());
                             dialog.setContentView(R.layout.placemarker_dialog);
-                            dialog.setTitle(temp.getName());                       
+                            
+                            dialog.setTitle(temp.getName());
+                            TextView placeName = (TextView) dialog.findViewById(R.id.place_name);
+                            placeName.setText(temp.getName());
+                            placeName.setHeight(0);
+                            placeName.setWillNotDraw(true);          
+                            
                             // Ustawianie danych
 
                             TextView placeDescription = (TextView) dialog.findViewById(R.id.place_description);
@@ -427,8 +458,24 @@ public class MapFragment extends Fragment implements LocationListener, LocationS
                             addEventButton.setOnClickListener(new OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
+                                    	//przed zamknieciem zapisujemy wartosc nazwy miejsca
+                                    	TextView nameField = (TextView) dialog.findViewById(R.id.place_name);
+                                    	CharSequence name = nameField.getText();
+                                    	
+                                    	dialog.dismiss();
+                                    	
+                                    	FragmentTransaction transaction = MainActivity.fragmentManager.beginTransaction(); 
+                                    	transaction.replace(R.id.Frame_Layout, new CalendarFragment());
                                     	Toast.makeText(getActivity().getApplicationContext(), "Dodanie nowego wydarzenie do miejsca",
                                     			   Toast.LENGTH_SHORT).show();
+                                    	
+                                    	transaction.commit();
+                                    	
+                                    	CalendarDialog dialog = new CalendarDialog();
+                        				dialog.setFromDrawerRight(true);
+                        				dialog.showCalendarDialog();
+                        				EditText e =(EditText)dialog.getView().findViewById(R.id.editText2);
+                        				e.setText(name);
                                     }
                             });
                             

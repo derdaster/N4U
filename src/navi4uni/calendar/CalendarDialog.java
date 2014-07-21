@@ -96,6 +96,10 @@ public class CalendarDialog {
 		}
 	}
 
+	public View getView() {
+		return dialogLayout;
+	}
+	
 	public void setFromDrawerRight(boolean setter) {
 		this.fromDrawerRight = setter;
 	}
@@ -271,7 +275,7 @@ public class CalendarDialog {
 				android.R.layout.simple_dropdown_item_1line);
 		style.setAdapter(adapter2);
 	}
-
+	
 	public void addEvent(View v) {
 
 		CalendarAPI calendar = new CalendarAPI(v.getContext());
