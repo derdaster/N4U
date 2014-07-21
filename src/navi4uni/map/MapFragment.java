@@ -18,13 +18,17 @@ import java.util.Iterator;
 
 import navi4uni.calendar.CalendarDialog;
 import navi4uni.calendar.CalendarFragment;
+import navi4uni.calendar.NavigationDrawerRightForCalendar;
 import navi4uni.gui.MainActivity;
+import navi4uni.gui.NavigationDrawerLeft;
+import navi4uni.gui.NavigationDrawerRight;
 import navi4uni.gui.R;
 import navi4uni.places.BuildingMarker;
 import navi4uni.places.FavoriteListener;
 import navi4uni.places.Favorites;
 import navi4uni.places.NaviMarker;
 import navi4uni.places.PlacesMarker;
+import navi4uni.settings.SettingsItems;
 import storage.Tuple;
 import android.app.Activity;
 import android.app.Dialog;
@@ -36,18 +40,22 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -320,11 +328,17 @@ public class MapFragment extends Fragment implements LocationListener, LocationS
                                     	
                                     	dialog.dismiss();
                                     	
+                                    	//Fragment odpowiedzialny za prawy drawer
+                                    	new NavigationDrawerRightForCalendar(MainActivity.context.getApplicationContext(),
+                        						MainActivity.mDrawerListRight).fillRightCalendarList();
+                                    	MainActivity.currentPosition = 1;
+        								MainActivity.imgRightMenu.setVisibility(View.VISIBLE);
+        								MainActivity.mDrawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, MainActivity.mDrawerListRight);
+                                    	
                                     	FragmentTransaction transaction = MainActivity.fragmentManager.beginTransaction(); 
                                     	transaction.replace(R.id.Frame_Layout, new CalendarFragment());
                                     	Toast.makeText(getActivity().getApplicationContext(), "Dodanie nowego wydarzenie do budynku",
                                     			   Toast.LENGTH_SHORT).show();
-                                    	
                                     	transaction.commit();
                                     	
                                     	CalendarDialog dialog = new CalendarDialog();
@@ -464,16 +478,24 @@ public class MapFragment extends Fragment implements LocationListener, LocationS
                                     	
                                     	dialog.dismiss();
                                     	
+                                    	//Fragment odpowiedzialny za prawy drawer
+                                    	new NavigationDrawerRightForCalendar(MainActivity.context.getApplicationContext(),
+                        						MainActivity.mDrawerListRight).fillRightCalendarList();
+                                    	MainActivity.currentPosition = 1;
+        								MainActivity.imgRightMenu.setVisibility(View.VISIBLE);
+        								MainActivity.mDrawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, MainActivity.mDrawerListRight);
+                                    	
+        								
                                     	FragmentTransaction transaction = MainActivity.fragmentManager.beginTransaction(); 
                                     	transaction.replace(R.id.Frame_Layout, new CalendarFragment());
                                     	Toast.makeText(getActivity().getApplicationContext(), "Dodanie nowego wydarzenie do miejsca",
                                     			   Toast.LENGTH_SHORT).show();
-                                    	
                                     	transaction.commit();
-                                    	
+                                   
                                     	CalendarDialog dialog = new CalendarDialog();
                         				dialog.setFromDrawerRight(true);
                         				dialog.showCalendarDialog();
+                        			
                         				EditText e =(EditText)dialog.getView().findViewById(R.id.editText2);
                         				e.setText(name);
                                     }

@@ -236,7 +236,16 @@ public class MainActivity extends ActionBarActivity {
 
 	private void changeFragmentLeft(int position) {
 		
-		MapFragment.saveCameraPosition();
+		
+		//zapis aktualnego polozenia mapy - NIE DZIALA !!!
+		if(MapFragment.mMap != null){
+			if(MapFragment.mMap.getCameraPosition() != null){
+				Log.i("Map object", MapFragment.mMap.getCameraPosition().toString());
+				MapFragment.currentCameraPosition = new LatLng(MapFragment.mMap.getCameraPosition().target.latitude,
+						MapFragment.mMap.getCameraPosition().target.longitude);
+			}
+			else { Log.i("+!!!!!!!!!", "znowu nie dziala");}
+		}
 		
 		fragmentManager = getSupportFragmentManager();
 		FragmentTransaction transaction = fragmentManager.beginTransaction();
