@@ -309,7 +309,13 @@ public class NaviMarker implements Serializable {
          this.configurePositons();
     }
     
-	
+	public static NaviMarker getMarkerFromListByName(String name){
+		for(NaviMarker nm: markerList) {
+			if(nm.getName().equals(name))
+				return nm;
+		}
+		return null;
+	}
 //	public void SaveDataOnLocalStorage(Tuple t) throws FileNotFoundException, IOException{
 ////		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(new File("MapContent.bin")));	//application local
 //		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(new File(Environment.getExternalStorageDirectory()	//zapis do karty SD (tymczasowo do podlagania wynikow)

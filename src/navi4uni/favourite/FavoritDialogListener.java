@@ -1,10 +1,15 @@
 package navi4uni.favourite;
 
 import java.util.ArrayList;
+
+import com.google.android.gms.maps.model.Marker;
+
 import navi4uni.map.MapFragment;
 import navi4uni.places.NaviMarker;
 import android.content.DialogInterface;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 
 public class FavoritDialogListener implements android.content.DialogInterface.OnClickListener {
 
@@ -21,6 +26,8 @@ public class FavoritDialogListener implements android.content.DialogInterface.On
 		for(NaviMarker m : list) {
 			if(m.getName().equals(items[which])) {	//szuamy w liscie markera o tej nazwie
 				MapFragment.setFocusOnLatLng(m.getLatLng(), MapFragment.mMap, true );
+				Marker marker = MapFragment.mMap.addMarker(m.getMarker());
+				marker.showInfoWindow();
 			}
 		}
 	}

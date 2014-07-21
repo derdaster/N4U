@@ -319,10 +319,8 @@ public class MapFragment extends Fragment implements LocationListener, LocationS
 												MainActivity.storage.SaveDataOnLocalStorage(new Tuple(NaviMarker.markerList, NaviMarker.images, Favorites.getFavoriteList(),
 														NaviMarker.defaultPosition, NaviMarker.tagSet));
 											} catch (FileNotFoundException e) {
-												// TODO Auto-generated catch block
 												e.printStackTrace();
 											} catch (IOException e) {
-												// TODO Auto-generated catch block
 												e.printStackTrace();
 											}
                                     }
@@ -345,7 +343,7 @@ public class MapFragment extends Fragment implements LocationListener, LocationS
                                     placeOpenHours.setWillNotDraw(true);
                             }
                             else {
-                                    placeOpenHours.setText("Godziny Otwarcia: " + temp.getOpenHours());
+                                    placeOpenHours.setText("Godziny otwarcia: " + temp.getOpenHours());
                             }
                             TextView placeAddress = (TextView) dialog.findViewById(R.id.place_address);
                             if(temp.getAddress().equals(" "))
@@ -354,7 +352,7 @@ public class MapFragment extends Fragment implements LocationListener, LocationS
                                     placeAddress.setWillNotDraw(true);
                             }
                             else {
-                                    placeAddress.setText("Adress miejsca: " + temp.getAddress());    
+                                    placeAddress.setText("Adress: " + temp.getAddress());    
                             }
                             TextView placePhone = (TextView) dialog.findViewById(R.id.place_phone);
                             if(temp.getPhone().equals(" ")){
@@ -444,10 +442,8 @@ public class MapFragment extends Fragment implements LocationListener, LocationS
 														Favorites.getFavoriteList(), NaviMarker.defaultPosition,
 														NaviMarker.tagSet));
 											} catch (FileNotFoundException e) {
-												// TODO Auto-generated catch block
 												e.printStackTrace();
 											} catch (IOException e) {
-												// TODO Auto-generated catch block
 												e.printStackTrace();
 											}
                                     }

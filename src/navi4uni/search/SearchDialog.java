@@ -2,6 +2,9 @@ package navi4uni.search;
 
 import java.util.ArrayList;
 
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import navi4uni.gui.MainActivity;
 import navi4uni.gui.R;
 import navi4uni.map.MapFragment;
@@ -10,6 +13,7 @@ import navi4uni.settings.SettingsItems;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -40,9 +44,11 @@ public class SearchDialog {
 	public void showDialog() {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(
-				MainActivity.context).setTitle(MainActivity.context.getString(R.string.searchForPlace));
+				MainActivity.context).setTitle(MainActivity.context
+				.getString(R.string.searchForPlace));
 
-		builder.setNegativeButton(MainActivity.context.getString(R.string.cancel),
+		builder.setNegativeButton(
+				MainActivity.context.getString(R.string.cancel),
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 
@@ -66,28 +72,34 @@ public class SearchDialog {
 				if (!search.isEmpty()) {
 					searchList = MapFragment.searchByParameter(search,
 							MapFragment.currentMarker);
-					
+
 					adapter = new SearchAdapter(MainActivity.context);
 					listView.setAdapter(adapter);
 				} else {
-					Toast.makeText(context, MainActivity.context.getString(R.string.searchForPlace),
+					Toast.makeText(
+							context,
+							MainActivity.context
+									.getString(R.string.searchForPlace),
 							Toast.LENGTH_LONG).show();
 				}
 
 			}
 		});
-		listView = (ListView) dialogView
-				.findViewById(R.id.searchList);
+		listView = (ListView) dialogView.findViewById(R.id.searchList);
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View v, int position,
 					long arg3) {
-				
-				MapFragment.setFocusOnLatLng(searchList.get(position)
-						.getLatLng(), MapFragment.mMap, true);
+				NaviMarker temp = NaviMarker.getMarkerFromListByName(searchList
+						.get(position).getName());
+				MapFragment.setFocusOnLatLng(temp.getLatLng(),
+						MapFragment.mMap, true);
 				alertDialog.cancel();
+				Marker marker = MapFragment.mMap.addMarker(temp.getMarker());
+				marker.showInfoWindow();
 			}
+
 		});
 
 		alertDialog.show();
