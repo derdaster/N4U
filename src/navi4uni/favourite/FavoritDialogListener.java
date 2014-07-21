@@ -26,6 +26,7 @@ public class FavoritDialogListener implements android.content.DialogInterface.On
 		for(NaviMarker m : list) {
 			if(m.getName().equals(items[which])) {	//szuamy w liscie markera o tej nazwie
 				MapFragment.setFocusOnLatLng(m.getLatLng(), MapFragment.mMap, true );
+				//stawiamy na tej mapie nowy marker - na wypadek, gdyby byl ukryty i otwieramy chmurke
 				Marker marker = MapFragment.mMap.addMarker(m.getMarker());
 				marker.showInfoWindow();
 			}

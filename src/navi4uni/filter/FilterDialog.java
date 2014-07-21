@@ -84,6 +84,7 @@ public class FilterDialog {
 									MapFragment.fillMap(MapFragment.currentMarker);
 
 								}else{
+									MapFragment.clearAllMarkers();
 									Toast.makeText(MainActivity.context, MainActivity.context.getString(R.string.allFieldsEmpty), Toast.LENGTH_SHORT).show();
 								}
 							}

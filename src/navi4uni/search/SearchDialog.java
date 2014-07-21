@@ -96,6 +96,7 @@ public class SearchDialog {
 				MapFragment.setFocusOnLatLng(temp.getLatLng(),
 						MapFragment.mMap, true);
 				alertDialog.cancel();
+				//stawiamy na tej mapie nowy marker - na wypadek, gdyby byl ukryty i otwieramy chmurke
 				Marker marker = MapFragment.mMap.addMarker(temp.getMarker());
 				marker.showInfoWindow();
 			}
