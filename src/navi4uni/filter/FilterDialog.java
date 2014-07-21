@@ -72,21 +72,7 @@ public class FilterDialog {
 						new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int id) {
-								String tags = "";
-								for(int i = 0 ; i < tagList.size(); i++){
-									if(tagList.get(i).isSelected()){
-										tags += tagList.get(i).getName() + ";";
-									}
-								}
-								if(!tags.isEmpty()){
-									navi4uni.map.MapFragment.setMarkersWithTag(tags, NaviMarker.markerList);
-									MapFragment.clearAllMarkers();
-									MapFragment.fillMap(MapFragment.currentMarker);
-
-								}else{
-									MapFragment.clearAllMarkers();
-									Toast.makeText(MainActivity.context, MainActivity.context.getString(R.string.allFieldsEmpty), Toast.LENGTH_SHORT).show();
-								}
+								renderFilteredMarkersOnMap();
 							}
 						})
 				.setNegativeButton(MainActivity.context.getString(R.string.cancel),
@@ -103,5 +89,22 @@ public class FilterDialog {
 		
 	}
 	
+	public static void renderFilteredMarkersOnMap() {
+		String tags = "";
+		for(int i = 0 ; i < tagList.size(); i++){
+			if(tagList.get(i).isSelected()){
+				tags += tagList.get(i).getName() + ";";
+			}
+		}
+		if(!tags.isEmpty()){
+			navi4uni.map.MapFragment.setMarkersWithTag(tags, NaviMarker.markerList);
+			MapFragment.clearAllMarkers();
+			MapFragment.fillMap(MapFragment.currentMarker);
+
+		}else{
+			MapFragment.clearAllMarkers();
+			Toast.makeText(MainActivity.context, MainActivity.context.getString(R.string.allFieldsEmpty), Toast.LENGTH_SHORT).show();
+		}
+	}
 	
 }

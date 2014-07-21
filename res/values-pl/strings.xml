@@ -37,12 +37,15 @@
      <string name="favouriteListEmpty">Lista ulubionych jest pusta</string>
      <string name="objectFilter">Filtr obiektów</string>
      <string name="show">Pokaż</string>
-     <string name="allFieldsEmpty">Wszystkie pola puste</string>
+     <string name="allFieldsEmpty">Wszystkie pola puste! Mapa została wyczyszczona.</string>
      <string name="cancel">Anuluj</string>
      <string name="searchForPlace">Szukaj miejsca..</string>
      <string name="enterSearchPhrase">Wpisz frazę do wyszukania</string>
      <string name="add">Dodaj</string>
      <string name="eventList">Lista wydarzeń</string>
+     
+     <string name="marker_addevent_button">Dodaj wydarzenie</string>
+     <string name="marker_showevent_button">Pokaż wydarzenia</string>
      
      <string name="turnOnLocalization">Włącz lokalizacje!</string>
      <string name="turnOnInternetConnection">Włącz połączenie z internetem!</string>

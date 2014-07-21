@@ -19,6 +19,7 @@ import java.util.Iterator;
 import navi4uni.calendar.CalendarDialog;
 import navi4uni.calendar.CalendarFragment;
 import navi4uni.calendar.NavigationDrawerRightForCalendar;
+import navi4uni.filter.FilterDialog;
 import navi4uni.gui.MainActivity;
 import navi4uni.gui.R;
 import navi4uni.places.BuildingMarker;
@@ -116,7 +117,7 @@ public class MapFragment extends Fragment implements LocationListener, LocationS
 			
 		try{
 			if(!currentMarker.isEmpty()){
-				fillMap(currentMarker);
+				FilterDialog.renderFilteredMarkersOnMap();
 			}
 		}catch(Exception e){
 			fillMap(NaviMarker.markerList);
@@ -571,7 +572,7 @@ public class MapFragment extends Fragment implements LocationListener, LocationS
 	 * Quality q3 (tested (Unit))
 	 */
 	public static void setMarkersWithTag(String tag, ArrayList<NaviMarker> markers) {
-		//mMap.clear();
+		mMap.clear();
 		if(tag != null && markers!=null){
 			currentMarker = new ArrayList<NaviMarker>();
 			String[] tags = tag.split(";");
@@ -580,7 +581,6 @@ public class MapFragment extends Fragment implements LocationListener, LocationS
 				while (itr.hasNext()) {
 					NaviMarker a = itr.next();
 					if (a.getTag().equals(t)) {
-	
 						currentMarker.add(a);
 						Log.i("setMarkersWithTag", "dodano marker");
 					}
@@ -658,16 +658,13 @@ public class MapFragment extends Fragment implements LocationListener, LocationS
 	}
 	
 	public static void clearAllMarkers(){
-		mMap.clear();
+		mMap.clear();	
 	}
-
-
 
 	@Override
 	public void activate(OnLocationChangedListener listener) {
 		locationChangedListener = listener;
 	}
-
 
 
 	@Override
