@@ -3,7 +3,7 @@
 
     <string name="app_name">Navi4Uni</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>	
+    <string name="action_settings">Ustawienia</string>	
     <string name="title_activity_map">MapActivity</string>
     <string name="title_activity_building_info">BuildingInfoActivity</string>
      <string name="zdjecie_budynku">Zdjęcie budynku</string>
@@ -16,7 +16,7 @@
      <string name="addEvent">Dodaj wydarzenie</string>
      <string name="setTime">Ustaw czas</string>
      <string name="time">Czas</string>
-     <string name="hour">HH</string>
+     <string name="hour">GG</string>
      <string name="minute">MM</string>
      <string name="reminder">Przypomnienie</string>
      <string name="search">Szukaj</string>
