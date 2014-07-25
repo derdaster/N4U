@@ -17,7 +17,7 @@ public class Favorites implements Serializable {
 	}
 	
 	public static void addToFavorites(String name) {
-		for (NaviMarker m : NaviMarker.getMarkerList()) {
+		for (NaviMarker m : NaviMarker.getMarkerList().values()) {
 			if (m.getName().equals(name)) { // czy istnieje taki marker
 				if (favoriteList.contains(name) == false) { // czy juz nie jest
 															// dodany do

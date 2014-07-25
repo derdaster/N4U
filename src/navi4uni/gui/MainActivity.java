@@ -94,9 +94,9 @@ public class MainActivity extends ActionBarActivity {
 		// wczytywanie pliku jesli istnieje
 		try {
 			Tuple stored = storage.GetDataFromLocalStorage();
-			NaviMarker.markerList.addAll(stored.markerList);
+			NaviMarker.markerList.putAll(stored.markerList);
 			// NaviMarker.images.putAll(stored.images);
-			Iterator<NaviMarker> itr = NaviMarker.markerList.iterator();
+			Iterator<NaviMarker> itr = NaviMarker.markerList.values().iterator();
 			while (itr.hasNext()) {
 				NaviMarker a = itr.next();
 				Log.i("Markery Z PLIKU!!!!", "Marker:" + a.getName() + " tag: "

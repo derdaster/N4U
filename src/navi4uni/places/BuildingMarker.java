@@ -26,7 +26,7 @@ public class BuildingMarker extends NaviMarker {
 	}
 
 	public void addBuildingToList(){
-		markerList.add(this);
+		markerList.put(this.id, this);
 	}
 	
 	public String getDepartment() {

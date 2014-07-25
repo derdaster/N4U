@@ -9,10 +9,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-import navi4uni.gui.MainActivity;
 import navi4uni.netLayer.ImageDownloader;
 
 import org.w3c.dom.Document;
@@ -27,8 +27,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.util.Xml;
-
-import com.google.android.gms.maps.model.LatLng;
 
 /**
  * @author MKarmanski karmel92@gmail.com
@@ -132,8 +130,8 @@ public class CampusXmlInterpteter {
 	 * @param setDefaultPosition - take default position from XML and set NaviMarker.defaultPosition static variable
 	 * @throws MalformedURLException 
 	 */
-	public ArrayList<NaviMarker> parseCampusXMLfromDoc(Document doc, String campus) throws MalformedURLException{
-		ArrayList<NaviMarker> localMarkerlist = new ArrayList<NaviMarker>();
+	public HashMap<String, NaviMarker> parseCampusXMLfromDoc(Document doc, String campus) throws MalformedURLException{
+		HashMap<String,NaviMarker> localMarkerlist = new HashMap<String, NaviMarker>();
 		if(doc != null){
 			boolean isBuilding = false;
 			boolean isPlace = false;
@@ -168,18 +166,21 @@ public class CampusXmlInterpteter {
 								else	manageData(cNode.getNodeName(), text, tempP);
 							}
 						}
-						if(isBuilding == true){
+						if(isBuilding == true && tempB.id !=null){
 							tempB.configurePositons();	//zebrane dane wrzucamy do obiektu MarkerOptions(googlowski)
 							Log.i("buildingDocument", tempB.toString());
 							tempB.setCampusName(campus);
-							localMarkerlist.add(tempB);
+							localMarkerlist.put(tempB.id, tempB);
 							ImagePath.put(tempB.getName(), new URL(tempB.getPhoto()));
 						}
-						else if (isPlace == true){
+						else if (isPlace == true && tempP.id != null){
 							tempP.configurePositons();
 							Log.i("PlaceDocument", tempP.toString());
 							tempP.setCampusName(campus);
-							localMarkerlist.add(tempP);
+							localMarkerlist.put(tempP.id, tempP);
+						}
+						else {
+							Log.i("parseCampusXMLfromDoc", "Marker id = null OR is not Building or Place");
 						}
 					}
 			}

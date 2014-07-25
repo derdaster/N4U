@@ -26,7 +26,7 @@ public class PlacesMarker extends NaviMarker  {
 	}
 
 	public void addPlaceToList(){
-		markerList.add(this);
+		markerList.put(this.id, this);
 	}
 	
 	public String getRoom() {

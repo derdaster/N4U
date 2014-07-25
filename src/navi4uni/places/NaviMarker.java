@@ -2,9 +2,8 @@ package navi4uni.places;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -30,7 +29,7 @@ public class NaviMarker implements Serializable {
 	String lat;
 	String campusName;
 
-	public static ArrayList<NaviMarker> markerList = new ArrayList<NaviMarker>();	//lista wszystkich markerow 
+	public static HashMap<String, NaviMarker> markerList = new HashMap<String, NaviMarker>();	//lista wszystkich markerow 
 	//public static LinkedList<String> itemNames = new LinkedList<String>();		//zbieramy nazwy do Kalendarza
 	public static HashMap<String, Bitmap> images = new HashMap<String, Bitmap>();	//zawiera wszystkie zdjecia budynkow
 	public static LatLng defaultPosition = null;
@@ -81,7 +80,7 @@ public class NaviMarker implements Serializable {
 		this.marker.position(pos);
 	}
 
-	public static List<NaviMarker> getMarkerList() {
+	public static HashMap<String, NaviMarker> getMarkerList() {
 		return markerList;
 	}
 
@@ -322,7 +321,7 @@ public class NaviMarker implements Serializable {
     }
     
 	public static NaviMarker getMarkerFromListByName(String name){
-		for(NaviMarker nm: markerList) {
+		for(NaviMarker nm: markerList.values()) {
 			if(nm.getName().equals(name))
 				return nm;
 		}

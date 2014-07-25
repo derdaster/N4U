@@ -84,7 +84,7 @@ public class SaveData {
 	            Tuple t = new Tuple();
 	            
 	            Object o = in.readObject();
-	            t.markerList = (ArrayList<NaviMarker>)o;
+	            t.markerList = (HashMap<String, NaviMarker>)o;
 	            o = in.readObject();
 	            t.tagSet = (Set<String>) o;
 	            o = in.readObject();
@@ -97,7 +97,7 @@ public class SaveData {
 	            	t.dPosition = new LatLng(lat, longi);
 	            }
 	            
-	            for (NaviMarker a : t.markerList){
+	            for (NaviMarker a : t.markerList.values()){
 	            	Log.i("Przepatrzałka", "|"+a.getName()+"|");	            	
 	            }
 	            o = in2.readObject();

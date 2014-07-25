@@ -22,7 +22,7 @@ public class FavoritDialogListener implements android.content.DialogInterface.On
 	@Override
 	public void onClick(DialogInterface dialog, int which) {
 		Log.i("ULUBIONE", "Click on: " + items[which]);
-		ArrayList<NaviMarker> list = (ArrayList<NaviMarker>) NaviMarker.getMarkerList();
+		ArrayList<NaviMarker> list = new ArrayList<NaviMarker> (NaviMarker.getMarkerList().values());
 		for(NaviMarker m : list) {
 			if(m.getName().equals(items[which])) {	//szuamy w liscie markera o tej nazwie
 				MapFragment.setFocusOnLatLng(m.getLatLng(), MapFragment.mMap, true );

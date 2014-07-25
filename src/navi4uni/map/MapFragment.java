@@ -14,6 +14,7 @@ package navi4uni.map;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import navi4uni.calendar.CalendarDialog;
@@ -51,6 +52,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -120,7 +122,7 @@ public class MapFragment extends Fragment implements LocationListener, LocationS
 				FilterDialog.renderFilteredMarkersOnMap();
 			}
 		}catch(Exception e){
-			fillMap(NaviMarker.markerList);
+			fillMap(new ArrayList<NaviMarker>(NaviMarker.markerList.values()));
 		}
 		
 		//Default position form XML
@@ -196,7 +198,7 @@ public class MapFragment extends Fragment implements LocationListener, LocationS
         mMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
         public void onInfoWindowClick(Marker m) {
                     NaviMarker temp = null;
-            for(NaviMarker nm: NaviMarker.markerList){
+            for(NaviMarker nm: NaviMarker.markerList.values()){
                     if(nm.getName().equals(m.getTitle())) {
                             Log.i("logi","ZNALEZIONO: "+nm.getName());
                             temp = nm;
@@ -571,13 +573,13 @@ public class MapFragment extends Fragment implements LocationListener, LocationS
 	 * 
 	 * Quality q3 (tested (Unit))
 	 */
-	public static void setMarkersWithTag(String tag, ArrayList<NaviMarker> markers) {
+	public static void setMarkersWithTag(String tag, HashMap<String,NaviMarker> markers) {
 		mMap.clear();
 		if(tag != null && markers!=null){
 			currentMarker = new ArrayList<NaviMarker>();
 			String[] tags = tag.split(";");
 			for(String t : tags){
-				Iterator<NaviMarker> itr = markers.iterator();
+				Iterator<NaviMarker> itr = markers.values().iterator();
 				while (itr.hasNext()) {
 					NaviMarker a = itr.next();
 					if (a.getTag().equals(t)) {
@@ -602,7 +604,7 @@ public class MapFragment extends Fragment implements LocationListener, LocationS
         try{
                 itr = markers.iterator();
         }catch(Exception e){
-                markers = NaviMarker.markerList;
+                markers = new ArrayList<NaviMarker>(NaviMarker.markerList.values());
                 itr = markers.iterator();
         }
         while (itr.hasNext()) {
@@ -621,7 +623,7 @@ public class MapFragment extends Fragment implements LocationListener, LocationS
         try{
                 itr = markers.iterator();
         }catch(Exception e){
-                markers = NaviMarker.markerList;
+                markers = new ArrayList<NaviMarker>(NaviMarker.markerList.values());	//values() zwraca obiekt Collection
                 itr = markers.iterator();
         }
         while (itr.hasNext()) {

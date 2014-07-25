@@ -12,13 +12,13 @@ import android.graphics.Bitmap;
 
 public class Tuple implements Serializable{
 	private static final long serialVersionUID = 1L;
-	public ArrayList<NaviMarker> markerList;
+	public HashMap<String, NaviMarker> markerList;
 	public HashMap<String, Bitmap> images;
 	public ArrayList<String> favoriteList;
 	public LatLng dPosition = null;
 	public Set<String> tagSet ;
 	
-	public Tuple(ArrayList<NaviMarker> _markerList, HashMap<String, Bitmap> _images, ArrayList<String> _favoriteList, 
+	public Tuple(HashMap<String,NaviMarker> _markerList, HashMap<String, Bitmap> _images, ArrayList<String> _favoriteList, 
 			LatLng position, Set<String> tags ){
 		this.markerList = _markerList;
 		this.images = _images;
