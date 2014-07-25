@@ -678,6 +678,7 @@ public class MapFragment extends Fragment implements LocationListener, LocationS
 				Log.i("Map object", MapFragment.mMap.getCameraPosition().toString());
 				MapFragment.currentCameraPosition = new LatLng(MapFragment.mMap.getCameraPosition().target.latitude,
 						MapFragment.mMap.getCameraPosition().target.longitude);
+				Log.i("SaveCameraPosition", "Saved !");
 			}
 			else { Log.i("SaveCameraPosition", "No camera Position!");}
 		}

@@ -236,15 +236,8 @@ public class MainActivity extends ActionBarActivity {
 	private void changeFragmentLeft(int position) {
 		
 		
-		//zapis aktualnego polozenia mapy - NIE DZIALA !!!
-		if(MapFragment.mMap != null){
-			if(MapFragment.mMap.getCameraPosition() != null){
-				Log.i("Map object", MapFragment.mMap.getCameraPosition().toString());
-				MapFragment.currentCameraPosition = new LatLng(MapFragment.mMap.getCameraPosition().target.latitude,
-						MapFragment.mMap.getCameraPosition().target.longitude);
-			}
-			else { Log.i("+!!!!!!!!!", "znowu nie dziala");}
-		}
+		//zapis aktualnego polozenia mapy
+		MapFragment.saveCameraPosition();
 		
 		fragmentManager = getSupportFragmentManager();
 		FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -283,6 +276,9 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	private void changeFragmentRight(int position) {
+		
+		//zapis aktualnego polozenia mapy
+		MapFragment.saveCameraPosition();
 		
 		
 		switch (DrawerElementsRight.values()[currentPosition]) {
@@ -328,7 +324,7 @@ public class MainActivity extends ActionBarActivity {
 		}
 		case CALENDAR: {
 			switch (DrawerElementsRightCalendar.values()[position]) {
-
+			
 			case SEARCH: {
 
 				CalendarDialog dialog = new CalendarDialog();
