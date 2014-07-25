@@ -196,7 +196,7 @@ public class CampusXmlInterpteter {
 	 * @throws XmlPullParserException
 	 * @throws IOException
 	 */
-	public ArrayList<NaviMarker> parseXml(String xmlAsString, String campus, boolean setDefaultPosition) throws XmlPullParserException, IOException{
+	public ArrayList<NaviMarker> parseXml(String xmlAsString, String campus) throws XmlPullParserException, IOException{
 		factory = XmlPullParserFactory.newInstance();
 		factory.setNamespaceAware(true);
 		parser = factory.newPullParser();
@@ -244,19 +244,6 @@ public class CampusXmlInterpteter {
 							
 							
 						case XmlPullParser.END_TAG:	//po wczytaniu TEXT, zrzucamy dane do obiektu na wyjsciu z tag-u/a
-							//Default Position
-							if(setDefaultPosition == true){
-								if(name.equals("defaultLat")){
-									latitude = Double.parseDouble(text);
-								}
-								if(name.equals("defaultLon")){
-									if(latitude != null){
-										NaviMarker.defaultPosition = new LatLng(latitude, 
-												Double.parseDouble(text));
-										Log.i("DefaultPosition", NaviMarker.defaultPosition.toString() );
-									}
-								}
-							}
 							
 							if(tempB != null || tempP != null){	//co by runtime nie bylo ze wpisujemy dane do nulla.
 								if(isBulding == true){	//uzupelniamy pola budynku
@@ -328,6 +315,10 @@ public class CampusXmlInterpteter {
 //		Log.i("Bpassed tagname", name);
 		if(text == null){
 			text = " ";			
+		}
+		if(name.equals("id")){
+			tempB.setId(text);
+			return true;
 		}
 		if(name.equals("tag")){
 			tempB.setTag(text);
@@ -406,6 +397,10 @@ public class CampusXmlInterpteter {
 		if(name.equals("tag")){
 			tempP.setTag(text);
 			NaviMarker.tagSet.add(text);
+			return true;
+		}
+		if(name.equals("id")){
+			tempP.setId(text);
 			return true;
 		}
 		if(name.equals("name")){

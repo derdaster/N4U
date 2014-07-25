@@ -18,6 +18,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class NaviMarker implements Serializable {
 	private static final long serialVersionUID = 1L;
 	transient MarkerOptions marker; // Nazwa, Snippet, Pozycja
+	String id;
 	String tag;
 	String openHours; // ?
 	String address; // ?
@@ -87,6 +88,14 @@ public class NaviMarker implements Serializable {
 //	public static void setMarkerList() {
 //		markerList = new ArrayList<NaviMarker>();
 //	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 	
 	public String getName() {
 		return this.marker.getTitle();
@@ -193,6 +202,7 @@ public class NaviMarker implements Serializable {
 	
 	public String toString(){
 		StringBuilder str = new StringBuilder();
+		str.append(this.id + "\n");
 		str.append(this.address + "\n");
 		str.append(this.description + "\n");
 		str.append(this.lat + "\n");
@@ -275,6 +285,7 @@ public class NaviMarker implements Serializable {
 	
     private void writeObject(java.io.ObjectOutputStream stream)
             throws IOException {
+    	stream.writeObject(this.id);
         stream.writeObject(this.tag);
         stream.writeObject(this.openHours);
         stream.writeObject(this.address);
@@ -291,6 +302,7 @@ public class NaviMarker implements Serializable {
     
     private void readObject(java.io.ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
+    	 this.id = (String) stream.readObject();
          this.tag = (String) stream.readObject();
          this.openHours = (String) stream.readObject();
          this.address = (String) stream.readObject();

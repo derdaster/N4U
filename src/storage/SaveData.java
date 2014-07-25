@@ -103,7 +103,7 @@ public class SaveData {
 	            o = in2.readObject();
 	            t.favoriteList = (ArrayList<String>)o;
 	            for (String s : t.favoriteList){
-	            	Log.i("Przepatrzałka (F)", s);	            	
+	            	Log.i("Przepatrzałka z pliku (F)", s);	            	
 	            }
 	            in.close();
 	            in2.close();
